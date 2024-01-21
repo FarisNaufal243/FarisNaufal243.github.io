@@ -1,0 +1,132 @@
+---
+title: "Pengaruh Jumlah UMKM Terhadap Nilai Ekspor Sektor Industri di Provinsi Jawa Barat"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Muhammad Faris Naufal"
+date: 2023-01-19
+number-sections: true
+format:
+  html: default
+  docx: default
+---
+
+![](Logo_Politeknik_APP%20(1).png)
+
+## Pendahuluan
+
+### Latar belakang
+
+Usaha mikro, kecil, dan menengah (UMKM) di Indonesia merupakan industri terbesar dalam jumlah dan kemampuannya dalam menyerap tenaga kerja. Meskipun dalam ukuran sumbangan terhadap PDB belum cukup tinggi, sektor ini dapat tetap menjadi tumpuan bagi stabilitas ekonomi. Dan penelitian ini membahas terhadap pengaruhnya jumlah UMKM terhadap Nilai Ekpor dalam bidang Industri di Jawa Barat.
+
+### Ruang lingkup
+
+Ruang lingkup pembahasan masalah sesuai dengan variable yang akan digunakan pada analisis kali ini, yaitu mengenai Jumlah UMKM terhadap Nilai Ekspor dalam bidang industri di Jawa Barat pada Tahun 2018-2020. Batasan masalah ini berperan membantu dalam mengidentifikasi masalah yang akan dibahas dan membatasi jangkauan proses yang dibahas.
+
+### Rumusan masalah
+
+1\.   Apakah adanya pengaruh JumlahUMKM terhadap Nilai ekspor bidang industri Jawa Barat?
+
+2\.   Apakah Jumlah UMKM berpengaruh besar terhadap Nilai ekspor bidang industri di Jawa Barat?
+
+### Tujuan dan manfaat penelitian
+
+Tujuan penelitian ini untuk mengetahui pengaruhnya Jumlah UMKM di provinsi Jawa Barat pada 2018-2022 terhadap Nilai Ekspor sektor industri di provinsi Jawa Barat.
+
+Manfaat penelitian ini agar pembaca mengerti bahwa ada tidaknya Jumlah UMKM di provinsi Jawa Barat pada 2018-2022 terhadap Nilai Ekspor sektor industri di provinsi Jawa Barat.
+
+### Package
+
+Ini tidak wajib di Packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+ library("tidyverse")
+ library("readxl")
+ library("writexl")
+ library("dplyr")
+```
+
+\## Studi pustaka
+
+1.  UMKM
+
+    Usaha Mikro Kecil dan Menengah (UMKM) adalah sektor perekonomian yang sangat penting di Indonesia. Jika ditelaah secara sektoral, usaha kecil dan menengah memiliki keunggulan dalam bidang usaha yang memanfaatkan sumber daya alam, seperti pertanian tanaman pangan, perkebunan, peternakan dan perikanan. Setidaknya terdapat tiga alasan yang mendasari negara berkembang belakangan ini memandang penting keberadaan UMKM (Berry, dkk, 2001).
+
+2.  Ekspor
+
+    Ekspor adalah kegiatan mengeluarkan barang dari daerah pabean. Menurut Undang-Undang Kepabeanan No.17 Tahun 2006 UMKM adalah kegiatan mengeluarkan barang produksi dari dalam negeri ke luar negeri untuk menghasilkan devisa
+
+### Data
+
+Data yang saya gunakan berupa Jumlah UMKM dan Nilai Ekspor sektor industri di Provinsi Jawa Barat.
+
+| Tahun | NilaiEkspor | UMKM   |
+|-------|-------------|--------|
+| 2018  | 30025777.16 | 536207 |
+| 2019  | 29575299.25 | 629597 |
+| 2020  | 26218526.83 | 625943 |
+| 2021  | 33495635.60 | 622225 |
+| 2022  | 33274360.49 | 667795 |
+
+: Tabel Jumlah UMKM dan Nilai Ekspor (dalam satuan ribu US\$).
+
+Penelitian ini menggunakan data Jumlah UMKM dan Nilai Ekspor sektor industri di Provinsi Jawa Barat. dari Badan Pusat Statistik(BPS).
+
+Baca data
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('Data nilaiekspor-umkm-jabr.xlsx')
+head(dat)
+```
+
+```{r}
+library("ggplot2")
+library("readxl")
+library("dplyr")
+ggplot(data=dat,aes(x=UMKM,y=NilaiEkspor)) +
+  geom_point(color="blue",size=2) + # setiap nambah command, selalu kasih tanda +
+  labs(title="tabel 1. hubungan antara Jumalh UMKM dan Nilai Ekspor Sektor Industri di Jawa Barat",
+       x="Jumlah UMKM",
+       y="Nilai Ekspor",
+       caption = "sumber: Badan Pusat Statistik") +
+  theme_classic()
+```
+
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 1 variabel independen. Penelitian ini merbaksud mencari hubungan antara . Spesifikasi yang dilakukan adalah:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah nlai ekspor dan $x_t$ adalah jumlah umkm.
+
+## Pembahasan
+
+### Pembahasan masalah
+
+Pada bagian ini dapat ditampilkan data dan visualisasi data yang telah dikumpulkan.
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+ reg1<-lm(NilaiEkspor~UMKM,data=dat)
+ summary(reg1)
+```
+
+## Kesimpulan
+
+Dari hasil regresi dapat dilihat bahwa jumlah UMKM tidak berbanding terbalik dengan Nilai Ekspor. Koefisien determinasi yang didapatkan adalah variabel jumlah UMKM mampu menjelaskan 6.2% variasi variabel nilai ekspor. Dan dari p-value: 0.6858 bisa disimpulkan bahwa jumlah umkm tidak berpengaruh signifikan terhadap variabel nilai Ekspor
+
+## Referensi
+
+Badan Pusat Statistik. (n.d.). Retrieved January 16, 2024, from
+
+<https://jabar.bps.go.id/indicator/8/357/6/nilai-ekspor-menurut-sektor.html>
+
+<https://jabar.bps.go.id/indicator/9/752/2/banyaknya-usaha-mikro-dan-kecil-menurut-kabupaten-kota.html>
+
+SENJA, Mahardea Puspa and SETIAWAN, Achma Hendra (2016) *ANALISIS PENGARUH JUMLAH UMKM, JUMLAH TENAGA KERJA UMKM, EKSPOR UMKM DAN INVESTASI UMKM TERHADAP PERTUMBUHAN EKONOMI INDONESIA.*
+
+<http://eprints.undip.ac.id/50068/>
